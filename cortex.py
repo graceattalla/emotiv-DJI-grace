@@ -76,10 +76,7 @@ class Cortex(Dispatcher):
         self.debit = 10
         self.license = ''
         self.isHeadsetConnected = False
-        url = "wss://localhost:6868"
-        self.ws = websocket.create_connection(url,
-                                              sslopt={"cert_reqs": ssl.CERT_NONE})
-        self.debug = debug_mode
+
         if client_id == '':
             raise ValueError('Empty your_app_client_id. Please fill in your_app_client_id before running the example.')
         else:
@@ -108,7 +105,7 @@ class Cortex(Dispatcher):
                                         on_error=self.on_error,
                                         on_close=self.on_close)
         threadName = "WebsockThread:-{:%Y%m%d%H%M%S}".format(datetime.utcnow())
-
+        
         # As default, a Emotiv self-signed certificate is required.
         # If you don't want to use the certificate, please replace by the below line  by sslopt={"cert_reqs": ssl.CERT_NONE}
         sslopt = {'ca_certs': "../certificates/rootCA.pem", "cert_reqs": ssl.CERT_REQUIRED}
