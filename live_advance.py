@@ -7,11 +7,11 @@ kb = Controller()
 
 
 """
-your_app_client_id = 'YB8Sh8MD29t0AzT01LKA6zzUjgwFGGnCepXByfzG'
-your_app_client_secret = 'LBTM22NqGxBDAZRnEi0Qh3x4yL6IsPiDzohQ2nY1cJyTI372YlNDIGWPyEkYtZCrtpe1QNiEWyzCXiUb3EBebLccqykMad1B0L4CpNGPr6NVFgwYLUOodJpIYqLWMPFD'
-trained_profile_name = 'testprof'  # Please set a trained profile name here
+your_app_client_id = 'lrV8SClWAJ7NJEjlC0U2nwJIQCL36XWZZR9uVar5'
+your_app_client_secret = 'kXDbmDMY9gtbh1OzCXkRSOoGaZwsHEcGYM2HfLLzOGzAH6F08nTNWXLAEoxkycTy9twB775mkoy9XsY1KzlinlI8Q9lA6d8HI8lttv145JUreeUrOrvLVBarphob7als'
+trained_profile_name = 'MN8 Grace 3'  # Please set a trained profile name here
 trained_cmd = 'push'
-threshold = 50
+threshold = 0.5
 
 
 class LiveAdvance():
@@ -39,8 +39,9 @@ class LiveAdvance():
     set_sensitivity(profile_name):
         To set the sensitivity of the 4 active mental command actions.
     """
-    def __init__(self, app_client_id, app_client_secret, **kwargs):
-        self.c = Cortex(app_client_id, app_client_secret, debug_mode=True, **kwargs)
+    #runs when an instance is created (done in main.py)
+    def __init__(self, main_ui, app_client_id, app_client_secret, **kwargs): #added main_ui
+        self.c = Cortex(app_client_id, app_client_secret, debug_mode=False, **kwargs)
         self.c.bind(create_session_done=self.on_create_session_done)
         self.c.bind(query_profile_done=self.on_query_profile_done)
         self.c.bind(load_unload_profile_done=self.on_load_unload_profile_done)
@@ -49,6 +50,9 @@ class LiveAdvance():
         self.c.bind(get_mc_active_action_done=self.on_get_mc_active_action_done)
         self.c.bind(mc_action_sensitivity_done=self.on_mc_action_sensitivity_done)
         self.c.bind(inform_error=self.on_inform_error)
+        self.main_ui = main_ui #added
+        self.app_client_id = your_app_client_id
+        self.app_client_secret = your_app_client_secret
 
     def start(self, profile_name, headsetId=''):
         """
@@ -237,10 +241,15 @@ class LiveAdvance():
         data: dictionary
              the format such as {'action': 'neutral', 'power': 0.0, 'time': 1590736942.8479}
         """
+
         data = kwargs.get('data')
         print('mc data: {}'.format(data))
-        if data['action'] == trained_cmd and data['power'] >= threshold:
-            kb.press('w',0.1)  # key and duration in seconds
+
+        #this will call the on_new_cmd data function in the main.py file
+        self.main_ui.on_new_cmd(data) #passing the data to the main UI (added)
+
+        # if data['action'] == trained_cmd and data['power'] >= threshold:
+        #     kb.press('w',0.1)  # key and duration in seconds
 
 
 
