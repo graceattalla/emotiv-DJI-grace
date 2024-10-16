@@ -7,11 +7,11 @@ kb = Controller()
 
 
 """
-your_app_client_id = 'lrV8SClWAJ7NJEjlC0U2nwJIQCL36XWZZR9uVar5'
-your_app_client_secret = 'kXDbmDMY9gtbh1OzCXkRSOoGaZwsHEcGYM2HfLLzOGzAH6F08nTNWXLAEoxkycTy9twB775mkoy9XsY1KzlinlI8Q9lA6d8HI8lttv145JUreeUrOrvLVBarphob7als'
+your_app_client_id = 'yqu23YG4xWGLZsPvWWrMuFvhysXLh0Jj7JSukFOQ'
+your_app_client_secret = 'V5vkwOTJqfLVCLf9Pl4bEVTlh8udcaGKhQqALHfseQsWedNgV7Zskb9MvhGCF9nPyjoaFncuJkmQfwUmYsmzATrHSDKPPXwDjmbBUbKVpVebYw0iuqpKehsOjP0nz5lC'
 trained_profile_name = 'MN8 Grace 3'  # Please set a trained profile name here
 trained_cmd = 'push'
-threshold = 0.5
+threshold = 0.2
 
 
 class LiveAdvance():
